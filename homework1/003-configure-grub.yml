@@ -26,5 +26,26 @@
         backrefs: yes
         state: present
       when: grub_content.stdout == "0"
+    #
+    # Comment: More accurate way to do the task. Using replace module and regexp to identify parameter from var.
+    # Url: https://stackoverflow.com/a/63396024
+    #
+    # - name: ensure net.ifnames parameter is set to 0
+    #   replace:
+    #     path: /etc/default/grub
+    #     regexp: '^(GRUB_CMDLINE_LINUX=(?:(?![" ]{{ option | regex_escape }}=).)*)(?:[" ]{{ option | regex_escape }}=\S+)?(.*")$'
+    #     replace: '\1 {{ option }}={{ value }}\2'
+    #   vars:
+    #     option: net.ifnames
+    #     value: 0
+    # - name: ensure biosdevname parameter is set to 0
+    #   replace:
+    #     path: /etc/default/grub
+    #     regexp: '^(GRUB_CMDLINE_LINUX=(?:(?![" ]{{ option | regex_escape }}=).)*)(?:[" ]{{ option | regex_escape }}=\S+)?(.*")$'
+    #     replace: '\1 {{ option }}={{ value }}\2'
+    #   vars:
+    #     option: biosdevname
+    #     value: 0
+    #
     - name: reconfigure grub
       command: grub2-mkconfig
