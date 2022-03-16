@@ -1,0 +1,30 @@
+---
+- name: configure grub
+  hosts: all
+  tasks:
+    - name: check if net.ifnames parameter is present in cmdline string
+      shell: grep -c 'net.ifnames' /etc/default/grub
+      register: grub_content
+      ignore_errors: true
+    - name: add net.ifnames parameter to cmdline string
+      lineinfile:
+        path: /etc/default/grub
+        regexp: '(GRUB_CMDLINE_LINUX=.*)"'
+        line: '\1 net.ifnames=0"'
+        backrefs: yes
+        state: present
+      when: grub_content.stdout == "0"
+    - name: check if biosdevname parameter is present in cmdline string
+      shell: grep -c 'biosdevname' /etc/default/grub
+      register: grub_content
+      ignore_errors: true
+    - name: add biosdevname parameter to cmdline string
+      lineinfile:
+        path: /etc/default/grub
+        regexp: '(GRUB_CMDLINE_LINUX=.*)"'
+        line: '\1 biosdevname=0"'
+        backrefs: yes
+        state: present
+      when: grub_content.stdout == "0"
+    - name: reconfigure grub
+      command: grub2-mkconfig

@@ -1,0 +1,22 @@
+---
+- name: purge web service
+  hosts: all
+  tasks:
+    - name: remove httpd
+      yum:
+        name: httpd
+        state: absent
+    - name: remove httpd default index.html
+      file:
+        path: /var/www/html/index.html
+        state: absent
+    - name: ensure http firewall ports closed
+      firewalld:
+        service: http # port: 80/tcp
+        permanent: yes
+        state: disabled
+    - name: ensure https firewall ports closed
+      firewalld:
+        service: https # port: 443/tcp
+        permanent: yes
+        state: disabled

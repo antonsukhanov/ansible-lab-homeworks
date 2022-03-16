@@ -1,0 +1,32 @@
+---
+- name: configure web service
+  hosts: all
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: latest
+    - name: ensure httpd service is enabled, running and not masked
+      systemd:
+        name: httpd
+        state: started
+        enabled: yes
+        masked: no
+    - name: replace httpd default index.html
+      copy:
+        src: artifacts/index.html
+        dest: /var/www/html/index.html
+    # - name: replace httpd default index.html
+    #   copy:
+    #     content: 'Welcome to my web server'
+    #     dest: /var/www/html/index.html
+    - name: ensure http firewall ports open
+      firewalld:
+        service: http # port: 80/tcp
+        permanent: yes
+        state: enabled
+    - name: ensure https firewall ports open
+      firewalld:
+        service: https # port: 443/tcp
+        permanent: yes
+        state: enabled
