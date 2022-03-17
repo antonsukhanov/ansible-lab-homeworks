@@ -1,4 +1,5 @@
 ---
+
 - name: remove users
   hosts: all
   vars_files:
