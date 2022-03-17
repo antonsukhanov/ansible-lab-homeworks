@@ -1,0 +1,19 @@
+---
+
+- debug:
+    msg: "Processing user account {{item.value.username}}@{{inventory_hostname}}"
+
+- name: create user if does not exist yet
+  user:
+    name: "{{ item.value.username }}"
+    comment: "{{ item.value.username }}@example.com"
+    shell: /bin/bash
+    password: "{{ item.value.password | password_hash('sha512')}}"
+  when: item.value.username not in passwd
+
+- name: update user if already exists
+  user:
+    name: "{{ item.value.username }}"
+    comment: "{{ item.value.username }}@example.com"
+    shell: /bin/bash
+  when: item.value.username in passwd

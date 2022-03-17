@@ -1,0 +1,29 @@
+---
+
+- name: create or update users from the list
+  hosts: all
+  vars_files:
+    - vars/users.yml
+  tasks:
+    #
+    # Comment: We can do 'cat /etc/passwd' and not to use slurp and decoding 
+    # from BASE64, but as I have learned we need to avoid running raw commands 
+    # on remote hosts. So we use slurp module here.
+    #
+
+    - name: get /etc/passwd file content
+      slurp:
+        src: /etc/passwd
+      register: slurpfile
+    # - debug:
+    #     msg: "Fetched encoded /etc/passwd file's content: {{slurpfile}}"
+
+    - name: populate passwd fact
+      set_fact:
+        passwd: "{{ slurpfile.content | b64decode}}"
+    # - debug:
+    #     msg: "Decoded passwd file content and populated task's fact: {{passwd}}"
+
+    - name: create or update users from the list
+      include_tasks: tasks/create-or-update-user.yml
+      with_dict: "{{ users }}"
