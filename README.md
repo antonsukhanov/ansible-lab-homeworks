@@ -1,3 +1,7 @@
+# Lint information
+
+Repo is linted with `ansible-lint`.
+
 # Initial Lab Environment Setup (MacOS)
 
 ## System preparation

@@ -1,28 +1,32 @@
 ---
-
+#
+# There is a best-practice to not run raw bash commands on remote hosts (ex.: cat /etc/passwd)
+# So, we use 'ansible.builtin.slurp' module and adding additional task for decoding file content
+# to avoid this situation.
+#
 - name: create or update users from the list
   hosts: all
   vars_files:
     - vars/users.yml
   tasks:
-    #
-    # Comment: We can do 'cat /etc/passwd' and not to use slurp and decoding 
-    # from BASE64, but as I have learned we need to avoid running raw commands 
-    # on remote hosts. So we use slurp module here.
-    #
-
     - name: get /etc/passwd file content
-      slurp:
+      ansible.builtin.slurp:
         src: /etc/passwd
       register: slurpfile
-    # - debug:
-    #     msg: "Fetched encoded /etc/passwd file's content: {{slurpfile}}"
+
+    - name: print fetched encoded passwd file content
+      ansible.builtin.debug:
+        var: slurpfile
+        verbosity: 1
 
     - name: populate passwd fact
-      set_fact:
-        passwd: "{{ slurpfile.content | b64decode}}"
-    # - debug:
-    #     msg: "Decoded passwd file content and populated task's fact: {{passwd}}"
+      ansible.builtin.set_fact:
+        passwd: "{{ slurpfile.content | b64decode }}"
+
+    - name: print decoded passw file content
+      ansible.builtin.debug:
+        var: passwd
+        verbosity: 1
 
     - name: create or update users from the list
       include_tasks: tasks/create-or-update-user.yml

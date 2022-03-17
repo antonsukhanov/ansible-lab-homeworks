@@ -1,0 +1,58 @@
+---
+#
+# There is a more accurate way to do the task. Using replace module and regexp to identify parameter from vars.
+# Url: https://stackoverflow.com/a/63396024
+#
+# Note, that task requires the usage of 'ansible.builtin.lineinfile' module, so we do not use this approach.
+#
+# - name: ensure net.ifnames parameter is set to 0
+#   replace:
+#     path: /etc/default/grub
+#     regexp: '^(GRUB_CMDLINE_LINUX=(?:(?![" ]{{ option | regex_escape }}=).)*)(?:[" ]{{ option | regex_escape }}=\S+)?(.*")$'
+#     replace: '\1 {{ option }}={{ value }}\2'
+#   vars:
+#     option: net.ifnames
+#     value: 0
+#
+# - name: ensure biosdevname parameter is set to 0
+#   replace:
+#     path: /etc/default/grub
+#     regexp: '^(GRUB_CMDLINE_LINUX=(?:(?![" ]{{ option | regex_escape }}=).)*)(?:[" ]{{ option | regex_escape }}=\S+)?(.*")$'
+#     replace: '\1 {{ option }}={{ value }}\2'
+#   vars:
+#     option: biosdevname
+#     value: 0
+#
+- name: configure grub
+  hosts: all
+  tasks:
+    - name: check if net.ifnames parameter is present in cmdline string
+      ansible.builtin.shell: grep -c 'net.ifnames' /etc/default/grub
+      register: grub_content
+      ignore_errors: true
+
+    - name: add net.ifnames parameter to cmdline string
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: (GRUB_CMDLINE_LINUX=.*)"
+        line: \1 net.ifnames=0"
+        backrefs: true
+        state: present
+      when: grub_content.stdout == "0"
+
+    - name: check if biosdevname parameter is present in cmdline string
+      ansible.builtin.shell: grep -c 'biosdevname' /etc/default/grub
+      register: grub_content
+      ignore_errors: true
+
+    - name: add biosdevname parameter to cmdline string
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: (GRUB_CMDLINE_LINUX=.*)"
+        line: \1 biosdevname=0"
+        backrefs: true
+        state: present
+      when: grub_content.stdout == "0"
+
+    - name: reconfigure grub
+      ansible.builtin.command: grub2-mkconfig

@@ -1,22 +1,51 @@
 ---
+#
+# Note, that usage of firewalld services may mean several ports.
+# Specify required ports manually instead if necessary.
+#
+# Note, that lab environment set by Vagrantfile has firewalld service
+# disabled by default. We enable firewalld service in this playbook,
+# but this operation may be dangerous on production environment.
+# In that case we should better check if firewalld service is set 
+# to enabled and than manage ports access.
+#
 - name: purge web service
   hosts: all
   tasks:
     - name: remove httpd
-      yum:
+      ansible.builtin.yum:
         name: httpd
         state: absent
+
     - name: remove httpd default index.html
-      file:
+      ansible.builtin.file:
         path: /var/www/html/index.html
         state: absent
+
+    - name: ensure firewalld service is enabled, running and not masked
+      ansible.builtin.systemd:
+        name: firewalld
+        state: started
+        enabled: true
+        masked: false
+
+    - name: ensure ssh firewall port open
+      ansible.builtin.firewalld:
+        service: ssh
+        state: enabled
+        permanent: true
+        immediate: true
+
     - name: ensure http firewall ports closed
-      firewalld:
-        service: http # port: 80/tcp
-        permanent: yes
+      ansible.builtin.firewalld:
+        service: http
         state: disabled
+        permanent: true
+        immediate: true
+
     - name: ensure https firewall ports closed
-      firewalld:
-        service: https # port: 443/tcp
-        permanent: yes
+      ansible.builtin.firewalld:
+        service: https
         state: disabled
+        permanent: true
+        immediate: true
