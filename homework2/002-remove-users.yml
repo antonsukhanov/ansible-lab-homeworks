@@ -1,13 +1,12 @@
 ---
-
 - name: remove users
   hosts: all
   vars_files:
     - vars/users.yml
   tasks:
     - name: remove users from the list
-      user:
-        name: "{{item.value.username}}"
+      ansible.builtin.user:
+        name: "{{ item.value.username }}"
         state: absent
-        remove: yes
+        remove: true
       with_dict: "{{ users }}"

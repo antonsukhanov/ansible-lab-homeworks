@@ -1,18 +1,19 @@
 ---
-
-- debug:
-    msg: "Processing user account {{item.value.username}}@{{inventory_hostname}}"
+- name: print processing user account
+  ansible.builtin.debug:
+    msg: Processing user account {{ item.value.username }}@{{ inventory_hostname }}
+    verbosity: 1
 
 - name: create user if does not exist yet
-  user:
+  ansible.builtin.user:
     name: "{{ item.value.username }}"
     comment: "{{ item.value.username }}@example.com"
     shell: /bin/bash
-    password: "{{ item.value.password | password_hash('sha512')}}"
+    password: "{{ item.value.password | password_hash('sha512') }}"
   when: item.value.username not in passwd
 
 - name: update user if already exists
-  user:
+  ansible.builtin.user:
     name: "{{ item.value.username }}"
     comment: "{{ item.value.username }}@example.com"
     shell: /bin/bash
