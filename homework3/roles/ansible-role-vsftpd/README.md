@@ -3,7 +3,7 @@ ansible-role-vsftpd
 
 This role installs and configures vsftpd service.
 
-Example Playbook
+Role Requirements
 ----------------
 
 Install role requirements with command: `ansible-galaxy collection install -r requirements.yml`.

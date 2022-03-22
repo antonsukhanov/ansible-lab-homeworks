@@ -3,9 +3,6 @@
   ansible.builtin.debug:
     msg: Running role in installation mode.
 
-- name: Ensure role requirements are installed
-  ansible.builtin.import_tasks: role-requirements.yml
-
 - name: Install vsftpd
   ansible.builtin.import_tasks: vsftpd-install.yml
 
