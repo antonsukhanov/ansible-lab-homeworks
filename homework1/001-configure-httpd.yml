@@ -28,7 +28,7 @@
       ansible.builtin.copy:
         src: files/index.html
         dest: /var/www/html/index.html
-    
+
     - name: ensure firewalld service is enabled, running and not masked
       ansible.builtin.systemd:
         name: firewalld
