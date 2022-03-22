@@ -16,11 +16,10 @@ Repo is linted with `ansible-lint`.
 
 Connect to all nodes and do following:
 
-1. Set locale using command: `localectl set-locale LANG=en_US.UTF-8`
-2. Switch to CentOS Stream 8:
+1. Switch to CentOS Stream 8:
     - `dnf --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos`
     - `dnf distro-sync`
-3. Install EPEL release: `yum install epel-release`
+2. Install EPEL release: `yum install epel-release`
 
 ## Usage
 
