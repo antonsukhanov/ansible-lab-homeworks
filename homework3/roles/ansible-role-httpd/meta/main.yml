@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Anton Sukhanov
+  description: Install and configure the httpd service
+  license: BSD-3-Clause
+  min_ansible_version: "2.9"
+  platforms:
+    - name: EL
+      versions:
+        - all
+  galaxy_tags:
+    - web
+    - apache
+    - webserver
+    - html
+    - httpd
+dependencies: []
+allow_duplicates: true

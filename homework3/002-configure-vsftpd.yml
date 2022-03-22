@@ -1,0 +1,5 @@
+---
+- name: Configure vsftpd service
+  hosts: all
+  roles:
+    - ansible-role-vsftpd

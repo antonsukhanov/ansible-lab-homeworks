@@ -1,0 +1,10 @@
+---
+- name: Remove httpd
+  ansible.builtin.yum:
+    name: httpd
+    state: absent
+
+- name: Remove httpd default page
+  ansible.builtin.file:
+    path: "{{ apache_public_path }}/{{ apache_default_page_filename }}"
+    state: absent

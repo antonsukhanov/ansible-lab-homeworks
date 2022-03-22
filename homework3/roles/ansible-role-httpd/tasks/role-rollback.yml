@@ -1,0 +1,11 @@
+---
+- name: Print usage mode
+  ansible.builtin.debug:
+    msg: Running role in rollback mode.
+
+- name: Rollback httpd installation and configuration
+  ansible.builtin.import_tasks: httpd-rollback.yml
+
+- name: Rollback firewalld configuration
+  ansible.builtin.import_tasks: firewalld-rollback.yml
+  when: firewalld_configure

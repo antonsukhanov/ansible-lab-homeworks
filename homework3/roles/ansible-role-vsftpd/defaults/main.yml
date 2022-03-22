@@ -1,0 +1,7 @@
+---
+vsftpd_test_public_file_copy: true
+
+firewalld_configure: true
+firewalld_ensure_ssh_permitted: true
+
+role_rollback: false

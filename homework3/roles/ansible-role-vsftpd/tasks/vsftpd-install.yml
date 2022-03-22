@@ -1,0 +1,12 @@
+---
+- name: Install vsftpd
+  ansible.builtin.yum:
+    name: vsftpd
+    state: latest
+
+- name: Ensure vsftpd service is enabled, running and not masked
+  ansible.builtin.systemd:
+    name: vsftpd
+    state: started
+    enabled: true
+    masked: false

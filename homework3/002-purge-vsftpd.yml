@@ -1,0 +1,7 @@
+---
+- name: Purge vsftpd service
+  hosts: all
+  roles:
+    - ansible-role-vsftpd
+  vars:
+    - role_rollback: true

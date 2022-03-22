@@ -1,0 +1,14 @@
+---
+- name: Print usage mode
+  ansible.builtin.debug:
+    msg: Running role in installation mode.
+
+- name: Install httpd
+  ansible.builtin.import_tasks: httpd-install.yml
+
+- name: Configure httpd
+  ansible.builtin.import_tasks: httpd-configure.yml
+
+- name: Configure firewalld
+  ansible.builtin.import_tasks: firewalld-configure.yml
+  when: firewalld_configure

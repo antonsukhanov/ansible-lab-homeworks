@@ -1,0 +1,8 @@
+---
+- name: Replace httpd default page
+  ansible.builtin.template:
+    src: "{{ apache_default_page_template_filename }}"
+    dest: "{{ apache_public_path }}/{{ apache_default_page_filename }}"
+    owner: "{{ apache_user }}"
+    group: "{{ apache_group }}"
+    mode: "{{ apache_upload_permissions }}"

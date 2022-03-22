@@ -1,0 +1,13 @@
+---
+apache_default_page_replace: true
+apache_default_page_title: Hello, world
+apache_default_page_heading: Welcome to my web server
+apache_default_page_description: Server is set up and running.
+apache_default_page_template_filename: default-page.html.j2
+apache_default_page_filename: index.html
+apache_upload_permissions: 0644
+
+firewalld_configure: true
+firewalld_ensure_ssh_permitted: true
+
+role_rollback: false
