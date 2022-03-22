@@ -1,0 +1,38 @@
+
+PLAY [Update source tree if necessary] *****************************************
+
+TASK [delete project directory before update] **********************************
+changed: [localhost]
+
+TASK [update project using git] ************************************************
+changed: [localhost]
+
+TASK [Set the git repository version] ******************************************
+ok: [localhost]
+
+TASK [Repository Version] ******************************************************
+ok: [localhost] => {
+    "msg": "Repository Version d1df76821e60aced5a469c153c58f705376c632b"
+}
+
+PLAY [Install content with ansible-galaxy command if necessary] ****************
+
+TASK [detect roles/requirements.(yml/yaml)] ************************************
+ok: [localhost] => (item={'ext': '.yml'})
+ok: [localhost] => (item={'ext': '.yaml'})
+
+TASK [fetch galaxy roles from requirements.(yml/yaml)] *************************
+skipping: [localhost] => (item={'changed': False, 'stat': {'exists': False}, 'invocation': {'module_args': {'path': '/var/lib/awx/projects/_8__homewoks/roles/requirements.yml', 'follow': False, 'get_md5': False, 'get_checksum': True, 'get_mime': True, 'get_attributes': True, 'checksum_algorithm': 'sha1'}}, 'failed': False, 'item': {'ext': '.yml'}, 'ansible_loop_var': 'item'}) 
+skipping: [localhost] => (item={'changed': False, 'stat': {'exists': False}, 'invocation': {'module_args': {'path': '/var/lib/awx/projects/_8__homewoks/roles/requirements.yaml', 'follow': False, 'get_md5': False, 'get_checksum': True, 'get_mime': True, 'get_attributes': True, 'checksum_algorithm': 'sha1'}}, 'failed': False, 'item': {'ext': '.yaml'}, 'ansible_loop_var': 'item'}) 
+
+TASK [detect collections/requirements.(yml/yaml)] ******************************
+ok: [localhost] => (item={'ext': '.yml'})
+ok: [localhost] => (item={'ext': '.yaml'})
+
+TASK [fetch galaxy collections from collections/requirements.(yml/yaml)] *******
+changed: [localhost] => (item={'changed': False, 'stat': {'exists': True, 'path': '/var/lib/awx/projects/_8__homewoks/collections/requirements.yml', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 69, 'inode': 17236227, 'dev': 2049, 'nlink': 1, 'atime': 1647968560.5086663, 'mtime': 1647968560.5086663, 'ctime': 1647968560.5086663, 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False, 'blocks': 8, 'block_size': 4096, 'device_type': 0, 'readable': True, 'writeable': True, 'executable': False, 'pw_name': 'root', 'gr_name': 'root', 'checksum': 'a77da69e60c76a10f9a9dc46cdb1cef8010b929c', 'mimetype': 'unknown', 'charset': 'unknown', 'version': None, 'attributes': [], 'attr_flags': ''}, 'invocation': {'module_args': {'path': '/var/lib/awx/projects/_8__homewoks/collections/requirements.yml', 'follow': False, 'get_md5': False, 'get_checksum': True, 'get_mime': True, 'get_attributes': True, 'checksum_algorithm': 'sha1'}}, 'failed': False, 'item': {'ext': '.yml'}, 'ansible_loop_var': 'item'})
+skipping: [localhost] => (item={'changed': False, 'stat': {'exists': False}, 'invocation': {'module_args': {'path': '/var/lib/awx/projects/_8__homewoks/collections/requirements.yaml', 'follow': False, 'get_md5': False, 'get_checksum': True, 'get_mime': True, 'get_attributes': True, 'checksum_algorithm': 'sha1'}}, 'failed': False, 'item': {'ext': '.yaml'}, 'ansible_loop_var': 'item'}) 
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=7    changed=3    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+

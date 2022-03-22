@@ -1,0 +1,32 @@
+Identity added: /tmp/bwrap_17_ydxld1mn/awx_17_y1r_a4ds/artifacts/17/ssh_key_data (ansible@control.example.com)
+
+PLAY [configure grub] **********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [check if net.ifnames parameter is present in cmdline string] *************
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+TASK [add net.ifnames parameter to cmdline string] *****************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [check if biosdevname parameter is present in cmdline string] *************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [add biosdevname parameter to cmdline string] *****************************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [reconfigure grub] ********************************************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+PLAY RECAP *********************************************************************
+node1.example.com          : ok=4    changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+node2.example.com          : ok=4    changed=3    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+

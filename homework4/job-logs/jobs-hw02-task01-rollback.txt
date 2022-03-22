@@ -1,0 +1,23 @@
+Identity added: /tmp/bwrap_23_lfik0897/awx_23_y2iopr5y/artifacts/23/ssh_key_data (ansible@control.example.com)
+Vault password: 
+
+PLAY [remove users] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [remove users from the list] **********************************************
+changed: [node2.example.com] => (item=None)
+changed: [node1.example.com] => (item=None)
+changed: [node1.example.com] => (item=None)
+changed: [node2.example.com] => (item=None)
+changed: [node1.example.com] => (item=None)
+changed: [node1.example.com]
+changed: [node2.example.com] => (item=None)
+changed: [node2.example.com]
+
+PLAY RECAP *********************************************************************
+node1.example.com          : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2.example.com          : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,36 @@
+Identity added: /tmp/bwrap_16_hsbsqg55/awx_16_xbljasmn/artifacts/16/ssh_key_data (ansible@control.example.com)
+
+PLAY [purge web service] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [remove httpd] ************************************************************
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+TASK [remove httpd default index.html] *****************************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [ensure firewalld service is enabled, running and not masked] *************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ensure ssh firewall port open] *******************************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ensure http firewall ports closed] ***************************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [ensure https firewall ports closed] **************************************
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+PLAY RECAP *********************************************************************
+node1.example.com          : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2.example.com          : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

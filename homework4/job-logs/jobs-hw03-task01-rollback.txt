@@ -1,0 +1,81 @@
+Identity added: /tmp/bwrap_25_9ngu8u0r/awx_25_mikoxnf0/artifacts/25/ssh_key_data (ansible@control.example.com)
+Vault password: 
+
+PLAY [Purge httpd service] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-httpd : Include OS-specific variables.] *********************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-httpd : Print usage mode] ***********************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-httpd : Install httpd] **************************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-httpd : Ensure httpd service is enabled, running and not masked] ***
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-httpd : Replace httpd default page] *************************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [ansible-role-httpd : Ensure firewalld service is enabled, running and not masked] ***
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-httpd : Ensure ssh firewall port open] **********************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-httpd : Ensure http firewall ports open] ********************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-httpd : Ensure https firewall ports open] *******************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [ansible-role-httpd : Print usage mode] ***********************************
+ok: [node1.example.com] => {
+    "msg": "Running role in rollback mode."
+}
+ok: [node2.example.com] => {
+    "msg": "Running role in rollback mode."
+}
+
+TASK [ansible-role-httpd : Remove httpd] ***************************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [ansible-role-httpd : Remove httpd default page] **************************
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+TASK [ansible-role-httpd : Ensure firewalld service is enabled, running and not masked] ***
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-httpd : Ensure ssh firewall port open] **********************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-httpd : Ensure http firewall ports closed] ******************
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+TASK [ansible-role-httpd : Ensure https firewall ports closed] *****************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+PLAY RECAP *********************************************************************
+node1.example.com          : ok=9    changed=4    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0   
+node2.example.com          : ok=9    changed=4    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0   
+

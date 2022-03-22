@@ -1,0 +1,70 @@
+Identity added: /tmp/bwrap_22_n2w5ktow/awx_22_0ex686wo/artifacts/22/ssh_key_data (ansible@control.example.com)
+Vault password: 
+
+PLAY [create or update users from the list] ************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [get /etc/passwd file content] ********************************************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [print fetched encoded passwd file content] *******************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [populate passwd fact] ****************************************************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [print decoded passw file content] ****************************************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [create or update users from the list] ************************************
+included: /tmp/bwrap_22_n2w5ktow/awx_22_0ex686wo/project/homework2/tasks/create-or-update-user.yml for node1.example.com, node2.example.com
+included: /tmp/bwrap_22_n2w5ktow/awx_22_0ex686wo/project/homework2/tasks/create-or-update-user.yml for node1.example.com, node2.example.com
+included: /tmp/bwrap_22_n2w5ktow/awx_22_0ex686wo/project/homework2/tasks/create-or-update-user.yml for node1.example.com, node2.example.com
+
+TASK [print processing user account] *******************************************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [create user if does not exist yet] ***************************************
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+TASK [update user if already exists] *******************************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [print processing user account] *******************************************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [create user if does not exist yet] ***************************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [update user if already exists] *******************************************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [print processing user account] *******************************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [create user if does not exist yet] ***************************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [update user if already exists] *******************************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+PLAY RECAP *********************************************************************
+node1.example.com          : ok=9    changed=3    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0   
+node2.example.com          : ok=9    changed=3    unreachable=0    failed=0    skipped=8    rescued=0    ignored=0   
+

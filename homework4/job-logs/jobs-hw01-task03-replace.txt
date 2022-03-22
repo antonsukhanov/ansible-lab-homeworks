@@ -1,0 +1,24 @@
+Identity added: /tmp/bwrap_18_1sr8v46m/awx_18_8fp9c3k4/artifacts/18/ssh_key_data (ansible@control.example.com)
+
+PLAY [configure grub] **********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ensure net.ifnames parameter is set to 0] ********************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ensure biosdevname parameter is set to 0] ********************************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [reconfigure grub] ********************************************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+PLAY RECAP *********************************************************************
+node1.example.com          : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2.example.com          : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

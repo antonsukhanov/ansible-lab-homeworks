@@ -1,0 +1,117 @@
+Identity added: /tmp/bwrap_42_bhpjug_e/awx_42_rri_s2_l/artifacts/42/ssh_key_data (ansible@control.example.com)
+Vault password: 
+
+PLAY [Purge vsftpd service] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Include OS-specific variables.] ********************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure required packages are installed] ************
+ok: [node2.example.com] => (item=python3-libselinux)
+ok: [node1.example.com] => (item=python3-libselinux)
+ok: [node2.example.com] => (item=python3-libsemanage)
+ok: [node1.example.com] => (item=python3-libsemanage)
+ok: [node2.example.com] => (item=python3-policycoreutils)
+ok: [node1.example.com] => (item=python3-policycoreutils)
+
+TASK [ansible-role-vsftpd : Print usage mode] **********************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Install vsftpd] ************************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure vsftpd service is enabled, running and not masked] ***
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Update vsftpd configuration] ***********************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Copy test public file] *****************************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Create public upload directory] ********************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Ensure SELinux is enabled] *************************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Set 'allow_ftpd_anon_write' flag on] ***************
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Allow vsftpd to write files to public upload path] ***
+skipping: [node2.example.com]
+skipping: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Apply new SELinux file context to filesystem] ******
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure firewalld service is enabled, running and not masked] ***
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure ssh firewall port open] *********************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure ftp firewall ports open] ********************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Print usage mode] **********************************
+ok: [node1.example.com] => {
+    "msg": "Running role in rollback mode."
+}
+ok: [node2.example.com] => {
+    "msg": "Running role in rollback mode."
+}
+
+TASK [ansible-role-vsftpd : Remove vsftpd] *************************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Remove vsftpd config file] *************************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Remove ftp public directory] ***********************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure SELinux is enabled] *************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Set 'allow_ftpd_anon_write' flag off] **************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Ensure firewalld service is enabled, running and not masked] ***
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Ensure ssh firewall port open] *********************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure ftp firewall ports closed] ******************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+PLAY RECAP *********************************************************************
+node1.example.com          : ok=12   changed=3    unreachable=0    failed=0    skipped=13   rescued=0    ignored=0   
+node2.example.com          : ok=12   changed=3    unreachable=0    failed=0    skipped=13   rescued=0    ignored=0   
+

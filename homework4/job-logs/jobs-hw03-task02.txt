@@ -1,0 +1,121 @@
+Identity added: /tmp/bwrap_41_2n7py_94/awx_41_f4191hip/artifacts/41/ssh_key_data (ansible@control.example.com)
+Vault password: 
+
+PLAY [Configure vsftpd service] ************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Include OS-specific variables.] ********************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Ensure required packages are installed] ************
+ok: [node1.example.com] => (item=python3-libselinux)
+ok: [node2.example.com] => (item=python3-libselinux)
+ok: [node1.example.com] => (item=python3-libsemanage)
+ok: [node2.example.com] => (item=python3-libsemanage)
+ok: [node1.example.com] => (item=python3-policycoreutils)
+ok: [node2.example.com] => (item=python3-policycoreutils)
+
+TASK [ansible-role-vsftpd : Print usage mode] **********************************
+ok: [node1.example.com] => {
+    "msg": "Running role in installation mode."
+}
+ok: [node2.example.com] => {
+    "msg": "Running role in installation mode."
+}
+
+TASK [ansible-role-vsftpd : Install vsftpd] ************************************
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Ensure vsftpd service is enabled, running and not masked] ***
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Update vsftpd configuration] ***********************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Copy test public file] *****************************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Create public upload directory] ********************
+changed: [node2.example.com]
+changed: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Ensure SELinux is enabled] *************************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Set 'allow_ftpd_anon_write' flag on] ***************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Allow vsftpd to write files to public upload path] ***
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Apply new SELinux file context to filesystem] ******
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Ensure firewalld service is enabled, running and not masked] ***
+ok: [node1.example.com]
+ok: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure ssh firewall port open] *********************
+ok: [node2.example.com]
+ok: [node1.example.com]
+
+TASK [ansible-role-vsftpd : Ensure ftp firewall ports open] ********************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Print usage mode] **********************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Remove vsftpd] *************************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Remove vsftpd config file] *************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Remove ftp public directory] ***********************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure SELinux is enabled] *************************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Set 'allow_ftpd_anon_write' flag off] **************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure firewalld service is enabled, running and not masked] ***
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure ssh firewall port open] *********************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+TASK [ansible-role-vsftpd : Ensure ftp firewall ports closed] ******************
+skipping: [node1.example.com]
+skipping: [node2.example.com]
+
+RUNNING HANDLER [ansible-role-vsftpd : Restart vsftpd service] *****************
+changed: [node1.example.com]
+changed: [node2.example.com]
+
+PLAY RECAP *********************************************************************
+node1.example.com          : ok=17   changed=7    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
+node2.example.com          : ok=17   changed=7    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
+
