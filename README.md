@@ -22,10 +22,6 @@ Connect to all nodes and do following:
     - `dnf distro-sync`
 3. Install EPEL release: `yum install epel-release`
 
-## Control node additional preparations
-
-1. Install firewalld module: `ansible-galaxy collection install ansible.posix`
-
 ## Usage
 
 Run `vagrant rsync-auto` to keep working folder synced.
