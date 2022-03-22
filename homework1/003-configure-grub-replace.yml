@@ -9,7 +9,7 @@
         replace: \1 {{ option }}={{ value }}\2
       vars:
         option: net.ifnames
-        value: 00
+        value: 0
 
     - name: ensure biosdevname parameter is set to 0
       replace:
@@ -18,7 +18,7 @@
         replace: \1 {{ option }}={{ value }}\2
       vars:
         option: biosdevname
-        value: 00
+        value: 0
 
     - name: reconfigure grub
       ansible.builtin.command: grub2-mkconfig
