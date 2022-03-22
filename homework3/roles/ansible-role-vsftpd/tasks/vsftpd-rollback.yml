@@ -1,0 +1,26 @@
+---
+- name: Remove vsftpd
+  ansible.builtin.yum:
+    name: vsftpd
+    state: absent
+
+- name: Remove vsftpd config file
+  ansible.builtin.file:
+    path: "{{ vsftpd_config_path }}"
+    state: absent
+
+- name: Remove ftp public directory
+  ansible.builtin.file:
+    path: "{{ vsftpd_public_path }}"
+    state: absent
+
+- name: Ensure SELinux is enabled
+  ansible.posix.selinux:
+    policy: targeted
+    state: enforcing
+
+- name: Set 'allow_ftpd_anon_write' flag off
+  ansible.posix.seboolean:
+    name: allow_ftpd_anon_write
+    state: false
+    persistent: true

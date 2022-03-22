@@ -1,0 +1,12 @@
+---
+- name: Install httpd
+  ansible.builtin.yum:
+    name: httpd
+    state: latest
+
+- name: Ensure httpd service is enabled, running and not masked
+  ansible.builtin.systemd:
+    name: httpd
+    state: started
+    enabled: true
+    masked: false

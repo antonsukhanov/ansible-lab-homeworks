@@ -1,0 +1,49 @@
+---
+- name: Update vsftpd configuration
+  ansible.builtin.template:
+    src: "{{ vsftpd_config_template_name }}"
+    dest: "{{ vsftpd_config_path }}"
+    owner: "{{ vsftpd_config_owner_user }}"
+    group: "{{ vsftpd_config_owner_group }}"
+    mode: "{{ vsftpd_config_file_permissions }}"
+  notify:
+    - Restart vsftpd service
+
+- name: Copy test public file
+  ansible.builtin.copy:
+    src: "{{ vsftpd_test_public_file_name }}"
+    dest: "{{ vsftpd_public_path }}/{{ vsftpd_test_public_file_name }}"
+    owner: "{{ vsftpd_public_upload_owner_user }}"
+    group: "{{ vsftpd_public_upload_owner_group }}"
+    mode: "{{ vsftpd_public_upload_file_permissions }}"
+  when: vsftpd_test_public_file_copy
+
+- name: Create public upload directory
+  ansible.builtin.file:
+    path: "{{ vsftpd_public_upload_path }}"
+    state: directory
+    owner: "{{ vsftpd_public_upload_owner_user }}"
+    group: "{{ vsftpd_public_upload_owner_group }}"
+    mode: "{{ vsftpd_public_upload_file_permissions }}"
+
+- name: Ensure SELinux is enabled
+  ansible.posix.selinux:
+    policy: targeted
+    state: enforcing
+
+- name: Set 'allow_ftpd_anon_write' flag on
+  ansible.posix.seboolean:
+    name: allow_ftpd_anon_write
+    state: true
+    persistent: false
+
+- name: Allow vsftpd to write files to public upload path
+  community.general.sefcontext:
+    target: "{{ vsftpd_public_upload_path }}(/.*)?"
+    setype: public_content_rw_t
+    state: present
+
+- name: Apply new SELinux file context to filesystem
+  ansible.builtin.command: restorecon -irv {{ vsftpd_public_upload_path }}
+  register: restorecon_output
+  changed_when: restorecon_output.rc != 0

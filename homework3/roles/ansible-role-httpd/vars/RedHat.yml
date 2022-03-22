@@ -1,0 +1,4 @@
+---
+apache_public_path: /var/www/html
+apache_user: apache
+apache_group: apache

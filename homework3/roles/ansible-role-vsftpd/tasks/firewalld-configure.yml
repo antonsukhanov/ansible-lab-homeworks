@@ -1,0 +1,22 @@
+---
+- name: Ensure firewalld service is enabled, running and not masked
+  ansible.builtin.systemd:
+    name: firewalld
+    state: started
+    enabled: true
+    masked: false
+
+- name: Ensure ssh firewall port open
+  ansible.builtin.firewalld:
+    service: ssh
+    state: enabled
+    permanent: true
+    immediate: true
+  when: firewalld_ensure_ssh_permitted
+
+- name: Ensure ftp firewall ports open
+  ansible.builtin.firewalld:
+    service: ftp
+    state: enabled
+    permanent: true
+    immediate: true

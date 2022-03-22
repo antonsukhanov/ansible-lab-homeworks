@@ -1,0 +1,23 @@
+---
+vsftpd_config_path: /etc/vsftpd/vsftpd.conf
+vsftpd_config_template_name: vsftpd.conf.j2
+vsftpd_config_owner_user: root
+vsftpd_config_owner_group: root
+vsftpd_config_file_permissions: 0600
+
+vsftpd_config_value_anonymous_enable: true
+vsftpd_config_value_anon_upload_enable: true
+vsftpd_config_value_anon_mkdir_write_enable: true
+
+vsftpd_public_path: /var/ftp/pub
+vsftpd_public_upload_path: /var/ftp/pub/upload
+vsftpd_public_upload_owner_user: ftp
+vsftpd_public_upload_owner_group: ftp
+vsftpd_public_upload_file_permissions: 0755
+
+vsftpd_test_public_file_name: hello.txt
+
+role_required_packages:
+  - python3-libselinux
+  - python3-libsemanage
+  - python3-policycoreutils

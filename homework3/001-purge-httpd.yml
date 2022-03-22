@@ -1,0 +1,7 @@
+---
+- name: Purge httpd service
+  hosts: all
+  roles:
+    - ansible-role-httpd
+  vars:
+    - role_rollback: true

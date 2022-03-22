@@ -1,0 +1,11 @@
+---
+- name: Include OS-specific variables.
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install and configure role services
+  ansible.builtin.import_tasks: role-install.yml
+  when: not role_rollback
+
+- name: Rollback role installation and services configuration
+  ansible.builtin.import_tasks: role-rollback.yml
+  when: role_rollback

@@ -1,0 +1,1 @@
+Install vsftpd role requirements with command: `ansible-galaxy collection install -r roles/ansible-role-vsftpd/requirements.yml`.
