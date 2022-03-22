@@ -10,3 +10,4 @@
         state: absent
         remove: true
       with_dict: "{{ users }}"
+      no_log: true
